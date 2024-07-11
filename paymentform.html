@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Connect Publications</title>
+  <link rel="shortcut icon" type="x-icon" href="https://i.ibb.co/bsB4419/Whats-App-Image-2024-05-04-at-13-42-02-81d4fc6a.jpg">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 60px;">
+    <img src="./images/Whats-App-Image-2024-05-04-at-13-42-02-81d4fc6a.jpg" width="50" height="50" alt="Logo">
+    <a class="navbar-brand" href="index.html" style="text-transform: uppercase;">Connect Publications</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="project.html">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="work.html">Work</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./termsandcondition.html">Terms And Conditions</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./reviews.html">Reviews</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="popup" >
+    <h1 class="popupheading">You Have Chosen Basic Plan</h1>
+    <form id="paymentForm" method="post">
+      <input type="text" placeholder="Enter your name" name="name" class="inputfields"required><br>
+      <input type="tel" placeholder="Enter your phone number" name="mobile" class="inputfields"required><br>
+      <input type="email" placeholder="Enter your email" name="email" class="inputfields"required><br>
+      <h1 class="addressHeader">Address Details:</h1>
+      <input type="text" placeholder="Enter your Door number" name="door" class="inputfields"required><br>
+      <input type="text" placeholder="Enter your Area name" name="area" class="inputfields"required><br>
+      <input type="text" placeholder="Enter your City name" name="city" class="inputfields"required><br>
+      <input type="text" placeholder="Enter your State" name="state" class="inputfields"required><br>
+      <h1 class="selecting_method">
+        Select Your Payment Method
+      </h1>
+      <div class="radiobutton">
+        <label>
+          <input type="radio" name="payment method" value="250" placeholder="Cash On Delivery" onclick="setamount(250)" id="cod"> Cash On delivery
+          
+        </label>
+        <p class="codpara">You Need To Pay An Advance Of 250 Rupees </p>
+        <label>
+          <input type="radio" name="payment method" value="2000" placeholder="Advance Payment" onclick="setamount(2000)" id="advance"> Full Payment
+        </label>
+      </div>
+      <button class="btn-12" id="rzp-button1"><span>Proceed To Pay</span></button>
+    </form>
+  </div>
+  
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    let amount = 0;
+    
+    function setamount(amountnew) {
+        amount = parseInt(amountnew); // Convert amountnew to integer and assign to amount
+    }
+    
+    var options = {
+        "key": "rzp_live_rHjIxWwhzHpbLK", // Replace with your Razorpay Key ID
+        "amount": 250 * 100, // Amount is in currency subunits. Default currency is INR. Hence, 1 refers to 1 paise (modify as needed)
+        "currency": "INR",
+        "name": "Connect Publications", // Your business name
+        "description": "Payment for Basic Plan,cod",
+        "image": "https://i.ibb.co/bsB4419/Whats-App-Image-2024-05-04-at-13-42-02-81d4fc6a.jpg",
+        "handler": function (response) {
+            alert('Payment successful. Transaction ID: ' + response.razorpay_payment_id + '. We will contact you within 24 hours, contact us for more details.');
+            // You can redirect or process further as needed
+        },
+        "prefill": {
+            "name": "", // Prefill customer's name
+            "email": "", // Prefill customer's email
+            "contact": "" // Prefill customer's phone number
+        },
+        "notes": {
+            "address": "" // Initialize with an empty string
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+
+    var options2 = {
+        "key": "rzp_live_rHjIxWwhzHpbLK", // Replace with your Razorpay Key ID
+        "amount": 2000 * 100, // Amount is in currency subunits. Default currency is INR. Hence, 1 refers to 1 paise (modify as needed)
+        "currency": "INR",
+        "name": "Connect Publications", // Your business name
+        "description": "Payment for Premium Plan",
+        "image": "https://i.ibb.co/bsB4419/Whats-App-Image-2024-05-04-at-13-42-02-81d4fc6a.jpg",
+        "handler": function (response) {
+            alert('Payment successful. Transaction ID: ' + response.razorpay_payment_id + '. We will contact you within 24 hours, contact us for more details.');
+            // You can redirect or process further as needed
+        },
+        "prefill": {
+            "name": "", // Prefill customer's name
+            "email": "", // Prefill customer's email
+            "contact": "" // Prefill customer's phone number
+        },
+        "notes": {
+            "address": "" // Initialize with an empty string
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+
+    var rzp1; // Declare rzp1 outside to access it globally
+
+    document.getElementById('rzp-button1').onclick = function(e) {
+        // Prevent the form from submitting
+        e.preventDefault();
+
+        // Determine which options to use based on amount
+        if (amount == 250) {
+            rzp1 = new Razorpay(options);
+        } else if (amount == 2000) {
+            rzp1 = new Razorpay(options2);
+        } else {
+            alert("Invalid amount selected.");
+            return;
+        }
+
+        // Get customer details and update options
+        options.prefill.name = document.getElementsByName("name")[0].value;
+        options.prefill.email = document.getElementsByName("email")[0].value;
+        options.prefill.contact = document.getElementsByName("mobile")[0].value;
+        var address = document.getElementsByName("door")[0].value + ", " +
+                      document.getElementsByName("area")[0].value + ", " +
+                      document.getElementsByName("city")[0].value + ", " +
+                      document.getElementsByName("state")[0].value;
+        options.notes.address = address; // Update address from input fields
+        
+        // Update the amount based on the selected payment method
+        options.amount = amount * 100;
+
+        // Open Razorpay checkout form
+        rzp1.open();
+    };
+  </script>
+</body>
+</html>
